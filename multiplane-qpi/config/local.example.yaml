@@ -1,0 +1,3 @@
+# Copy to ~/.mpqpi.yaml (one per computer; never committed).
+data_root: /Volumes/T7/POSTDOC          # Windows example: D:/Quentin
+uipsf_python: /opt/homebrew/anaconda3/envs/uiPSF/bin/python   # optional, for notebook 02

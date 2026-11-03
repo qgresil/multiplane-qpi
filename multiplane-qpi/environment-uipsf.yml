@@ -1,0 +1,8 @@
+# Separate environment for the optional uiPSF fits (notebook 02 calls it as a subprocess).
+# Follow the uiPSF installation instructions (https://github.com/ries-lab/uiPSF), then: pip install -e <this repo>
+# and put the path of this environment's python in ~/.mpqpi.yaml as uipsf_python.
+name: uiPSF
+channels: [conda-forge]
+dependencies:
+  - python=3.9
+  - pip

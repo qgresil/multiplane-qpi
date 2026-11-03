@@ -1,0 +1,48 @@
+# Multiplane microscope (8-plane prism, 2 cameras), built after Descloux et al. 2018.
+# Every value: {value, tag, source[, unit, note]}. Tags: paper | measured | manufacturer | derived | user | heuristic.
+# When you measure something, change the tag to `measured` and write how/when in `source`.
+
+cameras:
+  pixel_pitch_um: {value: 6.5, tag: manufacturer, unit: µm, source: "Hamamatsu Orca Flash 4.0; SI Table S1"}
+  gain_e_per_count: {value: 0.46, tag: manufacturer, unit: e-/count, source: "Orca Flash 4.0 nominal conversion factor", note: "not measured"}
+  offset_counts: {value: 100, tag: manufacturer, unit: counts, source: "Orca Flash 4.0 nominal offset", note: "not measured; measure on a dark frame"}
+  # which file / which interleaved frame is stream A (the paper's camera 1 = odd images 1,3,5,7) is an acquisition fact
+  dat_stream_order: {value: [A, B], tag: heuristic, source: ".dat files: frame 2k = stream A, 2k+1 = stream B (as used since the first notebooks)", note: "unverified"}
+  tiff_files: {value: {A: cam0, B: cam1}, tag: heuristic, source: "TIFF acquisitions: cam0 = stream A, cam1 = stream B", note: "unverified"}
+  stream_b_z_shift_steps: {value: 0, tag: heuristic, source: "frame 2k+1 recorded at the same stage z as frame 2k", note: "unverified; notebook 01 reports the camera comb offset that tests it"}
+
+stage:
+  increasing_z_towards_objective: {value: true, tag: heuristic, source: "assumed direction of the z scan (sets uiPSF stage_mov_dir; only the sign of even-m Zernike terms depends on it)", note: "unverified: check with a tilted or known-orientation sample"}
+
+detection:
+  tube_lens_mm: {value: 140, tag: paper, unit: mm, source: "SI Table S1 (Qioptiq AC 140/22.4)", note: "assumed identical to the paper's build"}
+  relay_t1_mm: {value: 160, tag: paper, unit: mm, source: "SI Table S1"}
+  relay_t2_mm: {value: 200, tag: paper, unit: mm, source: "SI Table S1"}
+  olympus_reference_tube_mm: {value: 180, tag: manufacturer, unit: mm, source: "Olympus infinity objectives: f_obj = 180 mm / magnification"}
+  prism_n: {value: 1.458, tag: paper, source: "SI Table S1 (Corning 7980 at 587.56 nm)"}
+  prism_d_mm: {value: 3.32, tag: paper, unit: mm, source: "SI §6.2, lateral displacement of neighbouring images"}
+  coverslip_n: {value: 1.52, tag: manufacturer, source: "borosilicate #1.5 coverslip, nominal"}
+  plane_spacing_paper_um: {value: 0.347, tag: paper, unit: µm, source: "SI §6.2: 347 ± 11 nm, 8 surface beads, 200 nm steps (60x)"}
+
+objectives:
+  60x_water:
+    magnification: {value: 60, tag: manufacturer, source: "Olympus UPLSAPO60XW"}
+    na: {value: 1.2, tag: manufacturer, source: "UPLSAPO60XW; SI Table S1"}
+    n_immersion: {value: 1.33, tag: manufacturer, source: "water immersion"}
+    pixel_um_measured: {value: null, tag: measured, unit: µm, source: "not measured yet (null = use the derived nominal value)"}
+  100x_oil:
+    magnification: {value: 100, tag: manufacturer, source: "Olympus UPLAPO100XOHR"}
+    na: {value: 1.5, tag: manufacturer, source: "UPLAPO100XOHR"}
+    n_immersion: {value: 1.518, tag: manufacturer, source: "immersion oil"}
+    pixel_um_measured: {value: null, tag: measured, unit: µm, source: "not measured yet (null = use the derived nominal value)"}
+
+brightfield:
+  band_um: {value: [0.5445, 0.6195], tag: paper, unit: µm, source: "BrightLine 582/75, SI Table S2 and Fig. S8"}
+  lambda0_um: {value: 0.58, tag: paper, unit: µm, source: "SI §2 (central wavelength 0.58 µm)"}
+  # 4 V halogen lamp spectrum, relative intensity read off SI Fig. S8 (black curve). Replace by your own lamp x filter measurement.
+  lamp_spectrum_nm: {value: [[540, 0.38], [550, 0.43], [560, 0.50], [570, 0.57], [580, 0.63], [590, 0.70], [600, 0.77], [610, 0.83], [620, 0.87], [625, 0.89]], tag: paper, source: "SI Fig. S8, digitised by eye (±5 %)", note: "the paper's lamp, not yours"}
+  na_ill: {value: 0.26, tag: paper, source: "SI §2 (NA_ill ≈ 0.26); set the condenser to this and record the reading", note: "your condenser setting is not known yet"}
+
+fluorescent_beads:
+  diameter_um: {value: 0.175, tag: manufacturer, unit: µm, source: "PS-Speck microscope point source kit (SI §8.3)"}
+  emission_um: {value: 0.515, tag: manufacturer, unit: µm, source: "PS-Speck green, emission peak (the SI used orange / deep red)"}

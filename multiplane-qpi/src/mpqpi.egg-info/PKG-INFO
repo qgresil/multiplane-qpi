@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mpqpi
+Version: 0.1.0
+Summary: Multiplane microscope calibration and 3D quantitative phase imaging after Descloux et al., Nat. Photonics 12, 165 (2018)
+Requires-Python: >=3.9
+Requires-Dist: numpy>=1.21
+Requires-Dist: scipy>=1.7
+Requires-Dist: scikit-image>=0.19
+Requires-Dist: tifffile>=2021.7
+Requires-Dist: matplotlib>=3.5
+Requires-Dist: h5py>=3.6
+Requires-Dist: pyyaml>=6
+Requires-Dist: nbformat>=5
+Provides-Extra: dev
+Requires-Dist: pytest>=7; extra == "dev"
+Requires-Dist: jupyter; extra == "dev"

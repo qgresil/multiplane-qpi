@@ -1,0 +1,18 @@
+# Core analysis environment (macOS and Windows):  conda env create -f environment.yml ; conda activate mpqpi
+name: mpqpi
+channels: [conda-forge]
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - scikit-image
+  - tifffile
+  - matplotlib
+  - h5py
+  - pyyaml
+  - nbformat
+  - jupyterlab
+  - pytest
+  - pip
+  - pip:
+      - -e .
